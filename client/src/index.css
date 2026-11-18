@@ -1,0 +1,233 @@
+@import '@fontsource-variable/bodoni-moda/opsz.css';
+@import '@fontsource-variable/bodoni-moda/opsz-italic.css';
+@import '@fontsource-variable/instrument-sans/index.css';
+@import 'tailwindcss';
+
+/* ─────────────────────────────────────────────────────────────────────────
+   TFF DESIGN TOKENS
+   Change the brand's colours and typefaces here — every page follows.
+   ───────────────────────────────────────────────────────────────────────── */
+@theme {
+  --color-ink: #0c0c0c;
+  --color-charcoal: #2a2a2a;
+  --color-graphite: #55524d;
+  --color-stone: #8b867d;
+  --color-mist: #d9d4ca;
+  --color-bone: #e9e5dd;
+  --color-paper: #f5f2ed;
+  --color-white: #ffffff;
+  --color-danger: #a1321f;
+  --color-success: #3f5b3d;
+
+  --font-display: 'Bodoni Moda Variable', 'Didot', 'Bodoni MT', Georgia, serif;
+  --font-sans: 'Instrument Sans Variable', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --breakpoint-3xl: 1800px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* One consistent, clearly visible keyboard focus ring everywhere */
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  button,
+  [role='button'],
+  summary {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  /* iOS zooms into inputs smaller than 16px */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  @media (min-width: 768px) {
+    input,
+    select,
+    textarea {
+      font-size: 14px;
+    }
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  /* Page gutters */
+  .shell {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+    max-width: 1720px;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .shell {
+      padding-inline: 3.5rem;
+    }
+  }
+
+  /* Small uppercase label used above headings, in navigation and on buttons */
+  .eyebrow {
+    font-size: 0.6875rem;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* Editorial display type */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-optical-sizing: auto;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.06em;
+    line-height: 0.8;
+  }
+
+  /* Underline that draws in on hover — used for text links */
+  .link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    padding-bottom: 2px;
+    transition: background-size 0.45s var(--ease-out-expo);
+  }
+  .link:hover,
+  .link:focus-visible,
+  .link[aria-current='page'] {
+    background-size: 100% 1px;
+  }
+
+  .link-underlined {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 1px;
+    padding-bottom: 2px;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .skeleton {
+    background: var(--color-bone);
+    animation: skeleton 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes skeleton {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -1%); }
+  100% { transform: translate(3%, 2%); }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* The site stays composed with motion switched off */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

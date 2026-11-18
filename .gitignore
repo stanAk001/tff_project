@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+.pgdata/
+server/uploads/
+*.log
+.DS_Store
+
+# Promo videos and the files used to make them — kept on this computer only
+marketing/
